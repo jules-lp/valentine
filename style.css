@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap');
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  min-height:100vh;
+  background: radial-gradient(ellipse at 30% 20%, #ffdde6 0%, #ffc2d4 30%, #ffb3c6 60%, #ffa8bc 100%);
+  display:flex; 
+  align-items:center; 
+  justify-content:center;
+  font-family:'Lato',sans-serif; 
+  overflow:hidden; 
+  position:relative;
+}
+
+/* ── Cœurs flottants ── */
+.hearts-bg { 
+  position:fixed; 
+  inset:0; 
+  pointer-events:none; 
+  z-index:0; 
+}
+
+.heart-particle {
+  position:absolute; 
+  opacity:0.55; 
+  animation:floatHeart linear infinite;
+  color:#e8738a; 
+  user-select:none; 
+  font-style:normal;
+}
+
+@keyframes floatHeart {
+  0%   { transform:translateY(0px)   rotate(0deg)  scale(1);    opacity:0.55; }
+  50%  { transform:translateY(-18px) rotate(8deg)  scale(1.08); opacity:0.7;  }
+  100% { transform:translateY(0px)   rotate(0deg)  scale(1);    opacity:0.55; }
+}
+
+/* ── Chats chanteurs ── */
+.cat-singer {
+  position:fixed; 
+  font-size:2.2rem; 
+  pointer-events:none; 
+  z-index:2;
+  user-select:none; 
+  animation:catFloat linear infinite;
+  filter:drop-shadow(0 2px 4px rgba(192,52,77,0.2));
+}
+
+@keyframes catFloat {
+  0%   { transform:translateY(0px)   rotate(-4deg) scale(1);    opacity:0.85; }
+  25%  { transform:translateY(-14px) rotate(3deg)  scale(1.06); opacity:1;    }
+  50%  { transform:translateY(-6px)  rotate(-2deg) scale(0.96); opacity:0.9;  }
+  75%  { transform:translateY(-18px) rotate(5deg)  scale(1.04); opacity:1;    }
+  100% { transform:translateY(0px)   rotate(-4deg) scale(1);    opacity:0.85; }
+}
+
+/* Notes de musique */
+.music-note {
+  position:fixed; 
+  pointer-events:none; 
+  z-index:3; 
+  font-size:1rem;
+  color:#c0344d; 
+  animation:noteFloat 2.5s ease-out infinite; 
+  opacity:0;
+}
+
+@keyframes noteFloat {
+  0%   { transform:translate(0,0)                  scale(0.5); opacity:0;   }
+  20%  { opacity:0.9; }
+  100% { transform:translate(var(--nx),-60px)      scale(1.2); opacity:0;   }
+}
+
+/* ── Carte principale ── */
+.card { 
+  position:relative; 
+  z-index:10; 
+  text-align:center; 
+  padding:20px; 
+}
+
+.title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,5.5vw,3.6rem); 
+  font-weight:700; 
+  color:#c0344d;
+  margin-bottom:18px; 
+  text-shadow:0 2px 12px rgba(192,52,77,0.15);
+  animation:titlePop 0.7s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+
+@keyframes titlePop {
+  0%   { opacity:0; transform:scale(0.7); }
+  100% { opacity:1; transform:scale(1);   }
+}
+
+.subtitle {
+  font-size:1.05rem; 
+  color:#c0344d; 
+  margin-bottom:34px; 
+  min-height:28px;
+  font-weight:400; 
+  letter-spacing:0.02em; 
+  transition:all 0.3s ease;
+  animation:fadeIn 0.4s ease both;
+}
+
+@keyframes fadeIn {
+  0%   { opacity:0; transform:translateY(6px); }
+  100% { opacity:1; transform:translateY(0);   }
+}
+
+.buttons { 
+  display:flex; 
+  align-items:center; 
+  justify-content:center; 
+  gap:22px; 
+  flex-wrap:wrap; 
+  position:relative; 
+}
+
+/* Bouton OUI */
+.btn-oui {
+  background:#d63651; 
+  color:white; 
+  border:none; 
+  padding:16px 44px;
+  border-radius:50px; 
+  font-size:1.15rem; 
+  font-family:'Lato',sans-serif;
+  font-weight:400; 
+  cursor:pointer; 
+  box-shadow:0 4px 20px rgba(214,54,81,0.4);
+  transition:transform 0.15s ease, box-shadow 0.15s ease, background 0.2s;
+  animation:btnAppear 0.7s 0.2s cubic-bezier(0.34,1.56,0.64,1) both;
+  letter-spacing:0.03em;
+}
+
+.btn-oui:hover  { 
+  transform:scale(1.06); 
+  box-shadow:0 6px 28px rgba(214,54,81,0.5); 
+  background:#c02d47; 
+}
+
+.btn-oui:active { 
+  transform:scale(0.97); 
+}
+
+/* Bouton NON */
+.btn-non {
+  background:#b0afaf; 
+  color:white; 
+  border:none; 
+  border-radius:50px;
+  font-size:1.15rem; 
+  font-family:'Lato',sans-serif; 
+  font-weight:400;
+  cursor:pointer; 
+  transition:transform 0.15s ease, opacity 0.3s;
+  animation:btnAppear 0.7s 0.35s cubic-bezier(0.34,1.56,0.64,1) both;
+  letter-spacing:0.03em; 
+  position:fixed; 
+  white-space:nowrap;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+@keyframes btnAppear {
+  0%   { opacity:0; transform:scale(0.5); }
+  100% { opacity:1; transform:scale(1);   }
+}
+
+/* ── Écran succès ── */
+.success { 
+  display:none; 
+  flex-direction:column; 
+  align-items:center; 
+  gap:20px; 
+  animation:titlePop 0.6s cubic-bezier(0.34,1.56,0.64,1) both; 
+}
+
+.success.show { 
+  display:flex; 
+}
+
+.success-title { 
+  font-family:'Playfair Display',serif; 
+  font-size:clamp(1.8rem,5vw,3rem); 
+  color:#c0344d; 
+  font-weight:700; 
+  text-shadow:0 2px 12px rgba(192,52,77,0.2); 
+}
+
+.success-sub { 
+  font-size:1.1rem; 
+  color:#c0344d; 
+  opacity:0.8; 
+}
+
+/* Image du chat */
+.cat-success-img {
+  width: min(260px, 70vw);
+  border-radius: 24px;
+  box-shadow: 0 8px 40px rgba(192,52,77,0.35), 0 0 0 6px #ffc2d4;
+  animation: catImgPop 0.7s 0.2s cubic-bezier(0.34,1.56,0.64,1) both, catImgFloat 3s 1s ease-in-out infinite;
+}
+
+@keyframes catImgPop {
+  0%   { opacity:0; transform:scale(0.4) rotate(-8deg); }
+  100% { opacity:1; transform:scale(1)   rotate(0deg);  }
+}
+
+@keyframes catImgFloat {
+  0%,100% { transform:translateY(0px)  rotate(-1deg); }
+  50%      { transform:translateY(-10px) rotate(1deg);  }
+}
+
+/* Confettis */
+.confetti-heart {
+  position:fixed; 
+  pointer-events:none; 
+  z-index:998;
+  animation:confettiFall linear forwards;
+}
+
+@keyframes confettiFall {
+  0%   { transform:translateY(-60px) rotate(0deg)   scale(0.5); opacity:1; }
+  80%  { opacity:1; }
+  100% { transform:translateY(110vh) rotate(720deg) scale(1.1); opacity:0; }
+}
+
+/* Étincelles */
+.sparkle {
+  position:fixed; 
+  pointer-events:none; 
+  z-index:999; 
+  font-size:18px;
+  animation:sparkleOut 1s ease-out forwards;
+}
+
+@keyframes sparkleOut {
+  0%   { transform:translate(0,0)                        scale(1); opacity:1; }
+  100% { transform:translate(var(--tx),var(--ty)) scale(0); opacity:0; }
+}
